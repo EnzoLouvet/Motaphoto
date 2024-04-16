@@ -1,0 +1,71 @@
+/* 
+     _   _                _           
+    | | | |              | |          
+    | |_| | ___  __ _  __| | ___ _ __ 
+    |  _  |/ _ \/ _` |/ _` |/ _ \ '__|
+    | | | |  __/ (_| | (_| |  __/ |   
+    \_| |_/\___|\__,_|\__,_|\___|_|
+*/
+
+@font-face {
+    font-family: 'SpaceMono400';
+    src: url('../fonts/SpaceMono-Regular.ttf') format('truetype');
+}
+
+.main-navigation ul li a {
+    text-decoration: none; /* Supprime la décoration de texte par défaut */
+    color: #000000; /* Couleur du texte */
+    font-family: 'SpaceMono400', sans-serif;
+    text-transform: uppercase;
+}
+
+
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.header_logo{
+    width: 216px;
+    height: 14px;
+}
+
+#primary-menu ul{
+    text-decoration: none;
+}
+
+
+.main-navigation ul {
+    list-style-type: none; 
+    padding: 0; 
+}
+
+
+body{
+    margin-left: 200px; 
+    margin-right: 200px;
+
+}
+
+
+.other_links-container{
+
+        display: flex;
+}
+
+.other_links-container{ 
+    display: flex;
+
+
+}
+
+.links-container{
+    display: flex;
+    flex-direction: row;
+
+}
+
+
