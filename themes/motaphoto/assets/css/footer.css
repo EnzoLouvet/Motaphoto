@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'SpaceMono400';
-    src: url('wp-content\themes\motaphoto\assets\fonts\SpaceMono-Regular.ttf') format('truetype');
+    src: url('../fonts/SpaceMono-Regular.ttf') format('truetype');
 }
 
 .footer-menu-class{
