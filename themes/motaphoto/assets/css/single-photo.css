@@ -1,0 +1,119 @@
+@font-face {
+    font-family: 'SpaceMono400Italic';
+    src: url('../fonts/SpaceMono-Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SpaceMono400';
+    src: url('../fonts/SpaceMono-Regular.ttf') format('truetype');
+}
+
+.render_photo {
+    max-width: 563px; /* Largeur maximale de l'image */
+    max-height: 840px;
+    object-fit: cover;
+}
+
+h2{
+    font-family: 'SpaceMono400Italic', sans-serif;
+    font-size: 66px;
+    text-transform: uppercase;
+}
+
+p{
+    font-family: 'SpaceMono400', sans-serif;
+    text-transform: uppercase;
+
+}
+
+a{
+    text-decoration: none;
+    color: black;
+
+}
+
+.photo-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.text_info{
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-right: 50px;
+
+}
+
+.modal_inside{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    font-family: 'SpaceMono400', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+
+.bouton-contact {
+    background: #D8D8D8;
+    color: #000000;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+
+.vous_aimerez_aussi{
+  
+}
+
+.vous_aimerez_aussi img{
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+
+
+}
+
+.related-photos-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 240px;
+  
+
+}
+
+
+/* Modale */
+
+.modal_button{
+   background-color: #D8D8D8;
+   width: 272px;
+   height: 50px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: rgb(0, 0, 0);
+   cursor: pointer;
+
+}
+
+.contact_inside{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+
+}
+
