@@ -25,13 +25,6 @@ p{
     text-transform: uppercase;
 
 }
-
-a{
-    text-decoration: none;
-    color: black;
-
-}
-
 .photo-container{
     display: flex;
     justify-content: center;
@@ -73,10 +66,6 @@ a{
     padding-right: 100px;
 }
 
-
-.vous_aimerez_aussi{
-  
-}
 
 .vous_aimerez_aussi img{
     width: 400px;

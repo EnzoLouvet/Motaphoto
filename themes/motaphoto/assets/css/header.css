@@ -50,9 +50,11 @@ nav{
 }
 
 .main-navigation{
-    margin-left: 330px;
-    margin-right: 330px;
-
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    z-index: 99999;
 }
 
 
@@ -68,13 +70,29 @@ nav{
 
 }
 
-.links-container{
-    display: flex;
-    flex-direction: row;
 
-}
 
 .logo-container{
     margin-top: 20px;
+}
+
+
+.inside_hamburger{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+
+}
+
+.hamburger-menu {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+    }
 }
 
