@@ -16,9 +16,9 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ArrowR.png" alt="Fleche droite" />
             </div>
         </div>
-        <div class="lightbox__info">  
-            <p id="lightbox-reference">
-            <p id="lightbox-title"></p>
+        <div class="lightbox__text">
+            <p id="lightbox-title"></p> <!-- Titre / Catégorie -->
+            <p id="lightbox-reference"></p> <!-- Référence -->
         </div>
     </div>
 </div>

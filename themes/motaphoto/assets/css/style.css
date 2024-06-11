@@ -921,6 +921,8 @@ nav li:hover {
 
 
 
+
+
 /* Cacher le menu par défaut sur les petits écrans */
 
 
@@ -930,6 +932,27 @@ nav li:hover {
       display: none;
   }
 }
+
+
+/* CSS ANIMATION */
+
+.rangee .img-hover a .btn-oeil {
+  transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.rangee .img-hover a .btn-oeil:hover {
+  transform: scale(1.5); /* Enlarge the icon */
+}
+
+.rangee .img-hover .btn-plein-ecran {
+  transition: transform 0.3s ease; /* Transition effect */
+}
+
+.rangee .img-hover .btn-plein-ecran:hover {
+  transform: scale(1.2) rotate(-180deg); /* Enlarge and rotate the logo */
+}
+
+
 
 
 

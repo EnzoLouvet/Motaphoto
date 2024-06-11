@@ -4,8 +4,6 @@
     // Ajoute la classe 'bouton' aux éléments ayant la classe '.wpcf7-submit'
     $('.wpcf7-submit').addClass('bouton');
 
-    // Code existant pour la modale, lightbox, etc.
-
     // Variables globales pour la pagination et les filtres
     var page = 1;
     var categorieSelection = 'all';
@@ -91,18 +89,17 @@
         $(document).on('click', '.btn-plein-ecran', function() {
             var image = $(this).closest('.rangee').find('.img-medium');
             var urlImage = image.attr('data-full');
-            var titreImage = image.attr('data-title');
+            var categoryImage = image.attr('data-category'); // Récupérer la catégorie
             var referenceImage = image.attr('data-references');
-            
             
             // Débogage : Vérifiez les valeurs récupérées
             console.log("URL de l'image:", urlImage);
-            console.log("Titre de l'image:", titreImage);
+            console.log("Catégorie de l'image:", categoryImage);
             console.log("Référence de l'image:", referenceImage);
             
             var creerImage = `<img src="${urlImage}" alt="Image agrandie">`;
             $('.lightbox__image').html(creerImage);
-            $('#lightbox-title').text(titreImage);
+            $('#lightbox-title').text(categoryImage); // Afficher la catégorie
             $('#lightbox-reference').text(referenceImage);
             transitionPopup($('.lightbox'), 1); // Affiche la lightbox avec effet de transition
 
@@ -110,8 +107,8 @@
             images = $('.img-medium').map(function() {
                 return {
                     url: $(this).data('full'),
-                    title: $(this).data('title'),
-                    reference: $(this).data('references') // Correction ici
+                    category: $(this).data('category'), // Ajouter la catégorie
+                    reference: $(this).data('references')
                 };
             }).get();
             currentIndex = $('.img-medium').index(image);
@@ -138,7 +135,7 @@
             var image = images[currentIndex];
             var creerImage = `<img src="${image.url}" alt="Image agrandie">`;
             $('.lightbox__image').html(creerImage);
-            $('#lightbox-title').text(image.title);
+            $('#lightbox-title').text(image.category); // Afficher la catégorie
             $('#lightbox-reference').text('Référence: ' + image.reference);
         });
     }

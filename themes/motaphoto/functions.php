@@ -73,6 +73,14 @@ function afficherImages($galerie, $exit) {
         while ($galerie->have_posts()) {
             $galerie->the_post();
             $categories = get_the_terms(get_the_ID(), 'categorie'); // Récupérer les termes de la taxonomie "categorie" associés à la photo
+            $category_list = '';
+            if ($categories && !is_wp_error($categories)) {
+                $category_names = array();
+                foreach ($categories as $category) {
+                    $category_names[] = $category->name;
+                }
+                $category_list = implode(', ', $category_names);
+            }
             ?>
             <div class="colonne">
                 <div class="rangee">
@@ -80,7 +88,7 @@ function afficherImages($galerie, $exit) {
                          src="<?php echo the_post_thumbnail_url(); ?>" 
                          data-full="<?php echo the_post_thumbnail_url('full'); ?>" 
                          data-references="<?php echo esc_attr(get_field('references')); ?>" 
-                         data-title="<?php echo get_the_title(); ?>"/> 
+                         data-category="<?php echo esc_attr($category_list); ?>" /> <!-- Changement ici -->
                     <div>
                         <div class="img-hover">
                             <img class="btn-plein-ecran" src="<?php echo get_template_directory_uri(); ?>/assets/images/fullscreen.png" alt="Icône de plein écran" />
@@ -88,23 +96,17 @@ function afficherImages($galerie, $exit) {
                                 <img class="btn-oeil" src="<?php echo get_template_directory_uri(); ?>/assets/images/eye_icon.png" alt="Icône en forme d'oeil" />
                             </a>
                             <div class="img-infos">
-                                 <?php
+                                <?php
                                 $reference_photo = get_field('references');
                                 if ($reference_photo) {
                                     echo '<p>' . $reference_photo . '</p>';
                                 }
                                 ?>
                                 <?php
-                                if ($categories && !is_wp_error($categories)) {
-                                    $category_names = array();
-                                    foreach ($categories as $category) {
-                                        $category_names[] = $category->name;
-                                    }
-                                    $category_list = implode(', ', $category_names);
+                                if ($category_list) {
                                     echo '<p>' . $category_list . '</p>';
                                 }
                                 ?>
-                               
                             </div>
                         </div>
                     </div>
@@ -120,6 +122,7 @@ function afficherImages($galerie, $exit) {
         exit(); 
     }
 }
+
 
 function charger_plus_images() {
     $page = $_POST['page'];
