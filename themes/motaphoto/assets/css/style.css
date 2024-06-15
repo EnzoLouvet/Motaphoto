@@ -28,6 +28,7 @@ a {
   all: unset;
   cursor: pointer;
   text-transform: uppercase;
+  font-family: 'SpaceMono400', sans-serif;
 }
 
 .bloc-page {
@@ -418,6 +419,7 @@ h1 {
   font-size: 14px;
   padding-left: 24px;
   margin-bottom: 10px;
+  border-radius: 8px;
 }
 
 /* galerie */
@@ -430,8 +432,8 @@ h1 {
 }
 .galerie__btn {
   margin: 27px auto 47px auto;
-  width: 120px;
-  height: 34px;
+  width: 300px;
+  height: 50px;
 }
 .galerie__btn input {
   width: 100%;
@@ -799,6 +801,20 @@ nav li:hover {
   .recommandations__btn {
     margin: 11px auto 31px auto;
   }
+  .text_info{
+    order: 2;
+    margin-right: 0px;
+
+  }
+  .contact_inside{
+    flex-direction: column;
+    margin-right: 0px;
+    justify-content: center;
+  }
+  .modal_button{
+    margin-bottom: 20px;
+
+  }
 }
 
 
@@ -859,7 +875,6 @@ nav li:hover {
   position: fixed;
   z-index: 2;
   left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(255, 0, 0, 0.9); /* Rouge avec opacité */
@@ -913,10 +928,33 @@ nav li:hover {
 .fleche-gauche, .fleche-droite{
   padding: 40px;
   cursor: pointer;
+  color: white;
+  font-size: 20px;
+  
+
+}
+
+.fleche-gauche:hover, .fleche-droite:hover{
+
+  transition: transform 0.3s ease; /* Smooth transition */
+  transform: scale(1.5); /* Enlarge the icon */
+
 
 }
 
 
+.lightbox__text{
+    color: white;
+    display: flex;
+    justify-content: space-around;
+
+
+}
+
+#close-lightbox img:hover{
+  transform: rotate(180deg); /* Enlarge and rotate the logo */
+
+}
 
 
 
@@ -931,6 +969,12 @@ nav li:hover {
   #menu-header-menu {
       display: none;
   }
+  .render_photo {
+    max-width: 100%; /* Largeur maximale de l'image */
+    max-height: 840px;
+    object-fit: cover;
+}
+
 }
 
 
@@ -952,7 +996,129 @@ nav li:hover {
   transform: scale(1.2) rotate(-180deg); /* Enlarge and rotate the logo */
 }
 
+.galerie__btn input:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  animation: backgroundFade 0.8s forwards;
+}
+
+.modal_button:hover{
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  animation: backgroundFade 0.5s forwards;
+
+
+
+}
+
+
+@keyframes backgroundFade {
+  from {
+    background-color: initial; /* Remplacez 'initial' par la couleur initiale si nécessaire */
+    color: initial; /* Remplacez 'initial' par la couleur initiale si nécessaire */
+  }
+  to {
+    background-color: black;
+    color: white;
+  }
+}
+
+.rangee .img-hover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: relative;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.92) 100%);
+}
+
+.rangee .img-hover img {
+  width: 100%; /* L'image prendra 100% de la largeur du conteneur */
+  height: 100%; /* L'image prendra 100% de la hauteur du conteneur */
+
+  -o-object-fit: cover;
+  object-fit: cover;
+  opacity: 1; /* Assurez-vous que l'image est visible */
+}
+
+
+.lightbox__image {
+  height: 100%; /* Utilise 90% de la hauteur de la vue */
+  width: auto; /* La largeur s'ajustera automatiquement en fonction de la hauteur */
+  max-height: 70%;
+}
+
+.lightbox__image img {
+  max-width: 500px; /* Garantit que l'image ne dépasse pas la largeur de son conteneur */
+  max-height: 100%; /* Garantit que l'image ne dépasse pas la hauteur de son conteneur */
+}
+
+
+.filtres .colonne{
+  justify-content: space-around;
+
+
+}
+
+.page_content{
+  margin: 38px 146px 0 146px;
 
 
 
 
+}
+
+
+@media (max-width: 830px) {
+  .lightbox__nav {
+      flex-direction: column; /* Ajustement de l'espace pour les écrans plus petits */
+  }
+
+  .lightbox__image img{
+    width: 400px;
+
+
+
+  }
+}
+
+.img-hover:hover{
+  animation: fadeInOut 3s infinite; /* Animation d'opacité en boucle */
+
+}
+
+
+@keyframes fadeInOut {
+  0% {
+      opacity: 0;
+  }
+  50% {
+      opacity: 0.9;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+
+.galerie__photo__container{
+  display: flex;
+  justify-content: center;
+
+}
+
+.like__more{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* Custom hover effect for Select2 options */
+.select2-results__option.select2-hover {
+  background-color: red !important;
+  color: white;
+}

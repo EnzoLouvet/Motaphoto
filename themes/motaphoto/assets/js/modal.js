@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function() {
     var modal = document.getElementById("myModal");
     var menuItem = document.querySelector('.menu-item-121');
@@ -44,5 +45,3 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-
-

@@ -54,14 +54,19 @@ function filter() {
         );
     }
 
-    $requeteAjax = new WP_Query(array(
+    $args = array(
         'post_type' => 'photo',
         'orderby' => 'date',
         'order' => $_POST['orderDirection'],
         'posts_per_page' => 8,
         'paged' => $_POST['page'],
-        'tax_query' => $tax_query,
-    ));
+    );
+
+    if (!empty($tax_query)) {
+        $args['tax_query'] = $tax_query;
+    }
+
+    $requeteAjax = new WP_Query($args);
 
     afficherImages($requeteAjax, true);
 }
@@ -72,7 +77,7 @@ function afficherImages($galerie, $exit) {
     if ($galerie->have_posts()) {
         while ($galerie->have_posts()) {
             $galerie->the_post();
-            $categories = get_the_terms(get_the_ID(), 'categorie'); // Récupérer les termes de la taxonomie "categorie" associés à la photo
+            $categories = get_the_terms(get_the_ID(), 'categorie'); 
             $category_list = '';
             if ($categories && !is_wp_error($categories)) {
                 $category_names = array();
@@ -88,7 +93,7 @@ function afficherImages($galerie, $exit) {
                          src="<?php echo the_post_thumbnail_url(); ?>" 
                          data-full="<?php echo the_post_thumbnail_url('full'); ?>" 
                          data-references="<?php echo esc_attr(get_field('references')); ?>" 
-                         data-category="<?php echo esc_attr($category_list); ?>" /> <!-- Changement ici -->
+                         data-category="<?php echo esc_attr($category_list); ?>" /> 
                     <div>
                         <div class="img-hover">
                             <img class="btn-plein-ecran" src="<?php echo get_template_directory_uri(); ?>/assets/images/fullscreen.png" alt="Icône de plein écran" />
@@ -123,18 +128,17 @@ function afficherImages($galerie, $exit) {
     }
 }
 
-
 function charger_plus_images() {
     $page = $_POST['page'];
 
-    $offset = ($page - 1) * 8; // Calculer l'offset pour récupérer les images suivantes
+    $offset = ($page - 1) * 8; 
 
     $galerie = new WP_Query(array(
         'post_type' => 'photo',
         'orderby' => 'date',
         'order' => 'DESC',
         'posts_per_page' => 8,
-        'offset' => $offset // Définir l'offset pour récupérer les images suivantes
+        'offset' => $offset 
     ));
 
     afficherImages($galerie, true);
@@ -142,5 +146,4 @@ function charger_plus_images() {
 
 add_action('wp_ajax_nopriv_charger_plus_images', 'charger_plus_images');
 add_action('wp_ajax_charger_plus_images', 'charger_plus_images');
-
 ?>

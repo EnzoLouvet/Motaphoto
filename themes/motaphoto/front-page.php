@@ -34,10 +34,10 @@
     <div class="filtres colonnes">
         <div class="filtres__taxonomie colonnes colonne">
             <form id="categories" class="js-filter-form filtres__taxonomie_categories filtre colonne">
-                <label for="select-categorie">Catégories</label>
+                <label for="select-categorie">CATÉGORIES</label>
                 <select id="select-categorie" name="categorie">
                     <option value="all" hidden></option>
-                    <option value="all">Toutes les catégories</option>
+                    <option value="all" selected>CATÉGORIES</option>
                     <?php afficherTaxonomies('categorie'); ?>
                 </select>
             </form>
@@ -45,16 +45,16 @@
                 <label for="select-format">Formats</label>
                 <select id="select-format" name="format">
                     <option value="all" hidden></option>
-                    <option value="all">Tous les formats</option>
+                    <option value="all" selected>FORMATS</option>
                     <?php afficherTaxonomies('format'); ?>
                 </select>
             </form>
         </div>
         <div class="filtres__tri colonnes colonne">
             <form id="ordre" class="js-filter-form filtres_taxonomie__formats filtre colonne">
-                <label for="select-ordre">Trier par</label>
+                <label for="select-ordre" >TRIER PAR</label>
                 <select id="select-ordre" name="ordre">
-                    <option class="js-ordre-item" value="DESC">Nouveautés</option>
+                    <option class="js-ordre-item" value="DESC" selected>NOUVEAUTÉS</option>
                     <option class="js-ordre-item" value="ASC">Les plus anciens</option>
                 </select>
             </form>
@@ -76,5 +76,7 @@
         <input type="button" id="btn-charger-plus" value="Charger plus">
     </div>
 </section>
+
+
 
 <?php get_footer(); ?>

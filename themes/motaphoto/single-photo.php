@@ -1,7 +1,8 @@
 <?php
 // Inclure l'en-tête du thème
-get_header();
+get_header(); ?>
 
+<?php
 // Démarrer la boucle WordPress
 if (have_posts()) {
     while (have_posts()) {
@@ -37,7 +38,7 @@ if (have_posts()) {
 
         // Afficher le type et la référence de la photo
         echo '<p>Type de photo : ' . $type_photo . '</p>';
-        echo '<p> ' . $reference_photo . '</p>';
+        echo '<p>Référence : ' . $reference_photo . '</p>';
 
         // Afficher les années de la photo
         if (!empty($annee_photo)) {
@@ -86,7 +87,7 @@ echo '<div class="contact_inside">';
 echo '<p>Cette photo vous intéresse ?</p>';
 
 ?>
-<div class="modal_button" id="openModalButton"><a>Contact</a></div>
+<div class="modal_button " id="openModalButton" data-ref-photo="<?php echo esc_attr($ref_photo); ?>"><a>Contact</a></div>
     <div id="myModal" class="modal">
         <div class="modal-content">
             <img src="<?php echo get_template_directory_uri();?>/assets/images/title_modal.png" class="title_modal">
@@ -94,40 +95,29 @@ echo '<p>Cette photo vous intéresse ?</p>';
             // Générer le formulaire de contact avec Contact Form 7
             echo do_shortcode('[contact-form-7 id="0d61f35" title="Contact form 1"]');
             ?>
-            <script>
-            // Pré-remplir le champ "REF-PHOTO" avec la référence de la photo
-            jQuery(document).ready(function($) {
-                var refPhotoField = $('input[data-name="REF-PHOTO"]');
-                if (refPhotoField.length && '<?php echo esc_attr($ref_photo); ?>' !== '') {
-                    refPhotoField.val('<?php echo esc_attr($ref_photo); ?>');
-                }
-
-                // Afficher la modale au clic sur le bouton de contact
-                $('#openModalButton').click(function() {
-                    $('#myModal').css('display', 'block');
-                });
-
-                // Fermer la modale au clic sur la zone de la modale
-                $(window).click(function(event) {
-                    if ($(event.target).hasClass('modal')) {
-                        $('.modal').css('display', 'none');
-                    }
-                });
-            });
-            </script>
         </div>
     </div>
 
-<?php
-// Ajouter le lien "Suivante"
-$next_post = get_adjacent_post(true, '', false);
-if (!empty($next_post)) {
-    $next_post_url = get_permalink($next_post->ID);
-}
-?>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var refPhoto = '<?php echo esc_js($ref_photo); ?>'; // Récupérer la référence PHP et échapper les caractères spéciaux pour JavaScript
+    
+    // Trouver le champ REF-PHOTO dans le formulaire Contact Form 7
+    var refPhotoField = document.querySelector('input[name="REF-PHOTO"]');
 
-<div class="galerie__photos colonnes padding">
-<?php 
+    // Vérifier si le champ existe et que la référence photo n'est pas vide
+    if (refPhotoField && refPhoto !== '') {
+        // Pré-remplir le champ avec la référence de la photo
+        refPhotoField.value = refPhoto;
+    }
+});
+</script>
+
+
+<?php
+// Ajouter les liens "Précédent" et "Suivant" avec prévisualisation des photos
+$prev_post = get_previous_post();
+$next_post = get_next_post();
 
 $current_category = get_the_terms(get_the_ID(), 'categorie');
 $current_category_slug = '';
@@ -137,28 +127,74 @@ if ($current_category && !is_wp_error($current_category)) {
         break;
     }
 }
-    $galerie = new WP_Query(array(
-        'post_type' => 'photo',
-        'orderby' => 'rand',
-        'posts_per_page' => 1,
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'categorie',
-                'field'    => 'slug',
-                'terms'    => $current_category_slug,
-            ),
-        ),
-    ));
 
-    afficherImages($galerie, false, 'small-thumbnail'); // Utilisez la taille personnalisée
+// Requête pour le post précédent dans la même catégorie
+$prev_post_query = new WP_Query(array(
+    'post_type' => 'photo',
+    'posts_per_page' => 1,
+    'orderby' => 'date',
+    'order' => 'DESC',
+    'post__not_in' => array(get_the_ID()),
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'categorie',
+            'field'    => 'slug',
+            'terms'    => $current_category_slug,
+        ),
+    ),
+));
+
+// Requête pour le post suivant dans la même catégorie
+$next_post_query = new WP_Query(array(
+    'post_type' => 'photo',
+    'posts_per_page' => 1,
+    'orderby' => 'date',
+    'order' => 'ASC',
+    'post__not_in' => array(get_the_ID()),
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'categorie',
+            'field'    => 'slug',
+            'terms'    => $current_category_slug,
+        ),
+    ),
+));
+
+echo '<div class="navigation-links">';
+if ($prev_post_query->have_posts()) {
+    while ($prev_post_query->have_posts()) {
+        $prev_post_query->the_post();
+        $prev_post_thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail');
+        echo '<div class="prev-post">';
+        echo '<div class="prev-post-preview">' . $prev_post_thumbnail . '</div>';
+        echo '<a href="' . get_permalink() . '">←</a>';
+        echo '</div>';
+    }
+    wp_reset_postdata();
+}
+if ($next_post_query->have_posts()) {
+    while ($next_post_query->have_posts()) {
+        $next_post_query->the_post();
+        $next_post_thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail');
+        echo '<div class="next-post">';
+        echo '<div class="next-post-preview">' . $next_post_thumbnail . '</div>';
+        echo '<a href="' . get_permalink() . '">→</a>';
+        echo '</div>';
+    }
+    wp_reset_postdata();
+}
+echo '</div>';
 ?>
-</div>
 
 </div>
 
 <?php
 // PARTIE "VOUS AIMEREZ AUSSI"
+?>
+<p class="like__more"> VOUS AIMEREZ AUSSI </p>
+<div class="galerie__photo__container">
 
+<?php
 // Récupérer la catégorie actuelle de la photo
 $current_category = get_the_terms(get_the_ID(), 'categorie');
 $current_category_slug = '';
@@ -189,6 +225,7 @@ if ($current_category && !is_wp_error($current_category)) {
     afficherImages($galerie, false, 'small-thumbnail'); // Utilisez la taille personnalisée
 ?>
 </div>
+</div>
 
 <?php
 // Inclure le pied de page du thème
@@ -196,25 +233,65 @@ get_footer();
 ?>
 
 <script>
-(function($) {
-    $(document).ready(function() {
-        // Afficher la modale au clic sur le bouton de contact
-        $('#openModalButton').click(function(event) {
-            event.preventDefault();
-            $('#myModal').css('display', 'block');
-        });
-
-        // Fermer la modale en cliquant en dehors du contenu de la modale
-        $(window).click(function(event) {
-            if ($(event.target).hasClass('modal')) {
-                $('#myModal').css('display', 'none');
-            }
-        });
-
-        // Fermer la modale en cliquant sur un bouton de fermeture (ajoutez-en un si nécessaire)
-        $('.close-modal').click(function() {
-            $('#myModal').css('display', 'none');
-        });
+// Pré-remplir le champ "REF-PHOTO" avec la référence de la photo
+jQuery(document).ready(function($) {
+    // Display the modal when the contact button is clicked
+    $('#openModalButton').click(function() {
+        var refPhoto = $(this).data('ref-photo');
+        $('#myModal').css('display', 'block');
+        
+        // Pre-fill the "REF-PHOTO" field with the photo reference
+        $('input[name="REF-PHOTO"]').val(refPhoto);
     });
-})(jQuery);
+
+    // Close the modal when clicking outside the modal content
+    $(window).click(function(event) {
+        if ($(event.target).hasClass('modal')) {
+            $('.modal').css('display', 'none');
+        }
+    });
+});
+
+
 </script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Trouver le bouton d'ouverture de la modale
+    var openModalButton = document.getElementById('openModalButton');
+    
+    // Attacher un gestionnaire d'événement au clic sur le bouton
+    openModalButton.addEventListener('click', function() {
+        // Récupérer la référence de la photo depuis l'attribut data-ref-photo
+        var refPhoto = openModalButton.getAttribute('data-ref-photo');
+        
+        // Sélectionner le champ REF-PHOTO dans le formulaire Contact Form 7
+        var refPhotoField = document.querySelector('input[name="REF-PHOTO"]');
+        
+        // Vérifier si le champ existe et que la référence photo n'est pas vide
+        if (refPhotoField && refPhoto !== '') {
+            // Pré-remplir le champ avec la référence de la photo
+            refPhotoField.value = refPhoto;
+        }
+        
+        // Afficher la modale (si nécessaire)
+        document.getElementById('myModal').style.display = 'block';
+    });
+});
+</script>
+
+<?php
+// Vérifier si nous sommes sur une page de type 'photo'
+if (is_singular('photo')) {
+    // Récupérer l'ID de la photo actuellement affichée
+    $post_thumbnail_id = get_post_thumbnail_id();
+    // Récupérer la référence de la photo depuis ACF en utilisant l'ID de la photo
+    $ref_photo = get_field('ref', $post_thumbnail_id); // Assurez-vous que 'ref' est le bon nom de champ ACF
+    
+    // Déboguer la valeur de $ref_photo
+    echo '<!-- Référence de la photo : ' . esc_attr($ref_photo) . ' -->';
+}
+?>

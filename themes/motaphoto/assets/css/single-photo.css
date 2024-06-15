@@ -14,6 +14,12 @@
     object-fit: cover;
 }
 
+.render_photo img{
+    max-width: 20px; /* Largeur maximale de l'image */
+    max-height: 840px;
+    object-fit: cover;
+}
+
 h2{
     font-family: 'SpaceMono400Italic', sans-serif;
     font-size: 66px;
@@ -101,8 +107,66 @@ p{
 
 .contact_inside{
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
     margin-top: 50px;
+    border-bottom: 1px solid black;
 
 }
 
+.contact_inside p{
+    text-align: center;
+
+}
+
+.navigation-links {
+    display: flex;
+    gap: 10px;
+}
+.prev-post-preview, .next-post-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.navigation-links a {
+    margin-top: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+
+.next-post{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+.next-post, .prev-post{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 20px;
+    
+    
+    }
+
+
+
+    @media (max-width: 439px) {
+        /* Styles à appliquer lorsque la largeur d'écran est <= 439px */
+        body {
+            font-size: 14px; /* Exemple de changement de taille de police pour un affichage plus compact */
+            text-align: center;
+        }
+        .main-navigation {
+            gap: 0px;
+            flex-direction: column;
+
+        }
+
+       
+    }    

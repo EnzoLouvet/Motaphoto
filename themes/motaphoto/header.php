@@ -17,38 +17,41 @@
                     <div class="bar1"></div>
                     <div class="bar2"></div>
                     <div class="bar3"></div>
-                    
                 </div>
             <div class="links-container">
             <div class="row">
                 <?php
                 wp_nav_menu(array(
                     'theme_location' => 'header', 
-                    'menu_class' => 'header-menu-class', 
+                    'menu_class' => 'header-menu-class',
+                    'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s<li class="menu-contact"><a href="#">Contact</a></li></ul>',
+                  
                 ));
                 ?>
-                </div>
-                <div id="myModal" class="modal">
-                    <div class="modal-content">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/title_modal.png" class="title_modal">
-                        <?php echo do_shortcode('[contact-form-7 id="0d61f35" title="Contact form 1"]'); ?>
-                    </div>
-                </div>
+                </div>           
             </div>
         </nav>
     </header>
     <div class="overlay2">
         <div class="middlered column">
-    <img src="<?php echo get_template_directory_uri();?>/assets/images/Logo.png" class="header_logo">
+   
     <div class="inside_hamburger">
     <?php
-                wp_nav_menu(array(
-                    'theme_location' => 'header', 
-                    'menu_class' => 'test', 
-                ));
-                ?>
+       
+       wp_nav_menu(array(
+           'theme_location' => 'header', 
+           'menu_class' => 'header-menu-class', 
+           'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s<li class="menu-contact"><a href="#">Contact</a></li></ul>',
+       ));
+     
+       
+              ?>
+              
+    
             </div>
         </div>         
     </div>
 </body>
+
+
 </html>

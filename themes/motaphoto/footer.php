@@ -1,6 +1,6 @@
 <?php 
-get_template_part('modale'); 
-get_template_part('lightbox');
+get_template_part('template-parts/modale'); 
+get_template_part('template-parts/lightbox');
 ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <footer class="footer">

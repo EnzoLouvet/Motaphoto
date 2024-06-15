@@ -22,11 +22,10 @@
 .modal-content {
   background-color: rgb(255, 255, 255);
   margin: 15% auto;
-  padding: 20px;
-  width: 600px;
+  padding: 20px 0px;
+  width: 51%;
   text-align: center;
   border: 5px solid black;
-  
 }
 
 
@@ -46,9 +45,9 @@
 }
 
 .title_modal{
-  width: 640px;
-  height: 106px;
-  position: relative;
+  width: 100%;
+  height: 100%;
+
   right: 20px;
 
 
@@ -57,12 +56,19 @@
 
 .font_label input{
   width: 50%;
-  border: 1px solid gray;
+  border: 1px solid #B8BBC2;
   border-radius: 8px;
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
+  font-size: 15px;
+  padding-left: 5px;
+  font-family: 'SpaceMono400', sans-serif;
 }
+
+
+
+
 
 .font_label textarea {
   width: 50%;
@@ -88,6 +94,12 @@
   justify-content: center;
   align-items: center;
   font-size: 60px;
+
+
+}
+
+#menu-header-menu-1{
+  color: white;
 
 
 }

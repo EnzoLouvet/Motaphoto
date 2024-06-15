@@ -57,3 +57,29 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('myModal');
+    var menuContacts = document.querySelectorAll('.menu-contact');
+    var span = document.getElementsByClassName('close')[0];
+
+    // Boucle à travers tous les éléments du menu contact pour ajouter le gestionnaire d'événements
+    menuContacts.forEach(function(menuContact) {
+        menuContact.addEventListener('click', function() {
+            modal.style.display = "block";
+        });
+    });
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
+

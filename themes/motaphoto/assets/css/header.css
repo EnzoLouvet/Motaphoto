@@ -7,13 +7,6 @@
     \_| |_/\___|\__,_|\__,_|\___|_|
 */
 
-@font-face {
-    font-family: 'SpaceMono400';
-    src: url('../fonts/SpaceMono-Regular.ttf') format('truetype');
-
-    font-family: 'SpaceMono700';
-    src: url('../fonts/SpaceMono-Bold.ttf') format('truetype');
-}
 
 .main-navigation ul li a {
     text-decoration: none; /* Supprime la décoration de texte par défaut */
@@ -22,16 +15,6 @@
     text-transform: uppercase;
 }
 
-.main-navigation ul li a:hover {
-    font-weight: 700;
-    font-family: 'SpaceMono700', sans-serif;
-}
-
-nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
 
 .header_logo{
@@ -39,9 +22,6 @@ nav{
     height: 14px;
 }
 
-#primary-menu ul{
-    text-decoration: none;
-}
 
 
 .main-navigation ul {
@@ -53,22 +33,12 @@ nav{
     margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     z-index: 99999;
+    align-items: center;
+    gap: 43%;
 }
 
-
-
-.other_links-container{
-
-        display: flex;
-}
-
-.other_links-container{ 
-    display: flex;
-
-
-}
 
 
 

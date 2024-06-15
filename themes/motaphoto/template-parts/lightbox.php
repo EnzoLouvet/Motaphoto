@@ -8,12 +8,12 @@
     <div class="column">
         <div class="lightbox__nav">
             <div class="fleche-gauche">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ArrowL.png" alt="Fleche gauche" />
+                <p>← Précédente</p>
             </div>
             <div class="lightbox__image">
             </div>
             <div class="fleche-droite">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ArrowR.png" alt="Fleche droite" />
+                <p>Suivante →</p>
             </div>
         </div>
         <div class="lightbox__text">
