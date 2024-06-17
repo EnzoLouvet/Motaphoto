@@ -76,9 +76,4 @@
         <input type="button" id="btn-charger-plus" value="Charger plus">
     </div>
 </section>
-
-<script>
-
-</script>
-
 <?php get_footer(); ?>
