@@ -77,6 +77,8 @@
     </div>
 </section>
 
+<script>
 
+</script>
 
 <?php get_footer(); ?>

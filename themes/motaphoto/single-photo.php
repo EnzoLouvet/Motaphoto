@@ -87,32 +87,22 @@ echo '<div class="contact_inside">';
 echo '<p>Cette photo vous intéresse ?</p>';
 
 ?>
-<div class="modal_button " id="openModalButton" data-ref-photo="<?php echo esc_attr($ref_photo); ?>"><a>Contact</a></div>
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <img src="<?php echo get_template_directory_uri();?>/assets/images/title_modal.png" class="title_modal">
-            <?php
-            // Générer le formulaire de contact avec Contact Form 7
-            echo do_shortcode('[contact-form-7 id="0d61f35" title="Contact form 1"]');
-            ?>
-        </div>
+<?php
+$ref_photo = get_field('references');
+?>
+
+<div class="modal_button" id="openModalButton" data-ref-photo="<?php echo esc_attr($ref_photo); ?>">
+    <a>Contact</a>
+</div>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/title_modal.png" class="title_modal">
+        <?php
+        // Générer le formulaire de contact avec Contact Form 7
+        echo do_shortcode('[contact-form-7 id="0d61f35" title="Contact form 1"]');
+        ?>
     </div>
-
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var refPhoto = '<?php echo esc_js($ref_photo); ?>'; // Récupérer la référence PHP et échapper les caractères spéciaux pour JavaScript
-    
-    // Trouver le champ REF-PHOTO dans le formulaire Contact Form 7
-    var refPhotoField = document.querySelector('input[name="REF-PHOTO"]');
-
-    // Vérifier si le champ existe et que la référence photo n'est pas vide
-    if (refPhotoField && refPhoto !== '') {
-        // Pré-remplir le champ avec la référence de la photo
-        refPhotoField.value = refPhoto;
-    }
-});
-</script>
-
+</div>
 
 <?php
 // Ajouter les liens "Précédent" et "Suivant" avec prévisualisation des photos
@@ -232,66 +222,3 @@ if ($current_category && !is_wp_error($current_category)) {
 get_footer();
 ?>
 
-<script>
-// Pré-remplir le champ "REF-PHOTO" avec la référence de la photo
-jQuery(document).ready(function($) {
-    // Display the modal when the contact button is clicked
-    $('#openModalButton').click(function() {
-        var refPhoto = $(this).data('ref-photo');
-        $('#myModal').css('display', 'block');
-        
-        // Pre-fill the "REF-PHOTO" field with the photo reference
-        $('input[name="REF-PHOTO"]').val(refPhoto);
-    });
-
-    // Close the modal when clicking outside the modal content
-    $(window).click(function(event) {
-        if ($(event.target).hasClass('modal')) {
-            $('.modal').css('display', 'none');
-        }
-    });
-});
-
-
-</script>
-
-
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Trouver le bouton d'ouverture de la modale
-    var openModalButton = document.getElementById('openModalButton');
-    
-    // Attacher un gestionnaire d'événement au clic sur le bouton
-    openModalButton.addEventListener('click', function() {
-        // Récupérer la référence de la photo depuis l'attribut data-ref-photo
-        var refPhoto = openModalButton.getAttribute('data-ref-photo');
-        
-        // Sélectionner le champ REF-PHOTO dans le formulaire Contact Form 7
-        var refPhotoField = document.querySelector('input[name="REF-PHOTO"]');
-        
-        // Vérifier si le champ existe et que la référence photo n'est pas vide
-        if (refPhotoField && refPhoto !== '') {
-            // Pré-remplir le champ avec la référence de la photo
-            refPhotoField.value = refPhoto;
-        }
-        
-        // Afficher la modale (si nécessaire)
-        document.getElementById('myModal').style.display = 'block';
-    });
-});
-</script>
-
-<?php
-// Vérifier si nous sommes sur une page de type 'photo'
-if (is_singular('photo')) {
-    // Récupérer l'ID de la photo actuellement affichée
-    $post_thumbnail_id = get_post_thumbnail_id();
-    // Récupérer la référence de la photo depuis ACF en utilisant l'ID de la photo
-    $ref_photo = get_field('ref', $post_thumbnail_id); // Assurez-vous que 'ref' est le bon nom de champ ACF
-    
-    // Déboguer la valeur de $ref_photo
-    echo '<!-- Référence de la photo : ' . esc_attr($ref_photo) . ' -->';
-}
-?>

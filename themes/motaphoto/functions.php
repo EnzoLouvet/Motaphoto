@@ -10,7 +10,6 @@ add_action('after_setup_theme', function() {
 
 function theme_enqueue_styles() {
     wp_enqueue_style('parent-style', get_template_directory_uri() . '/assets/css/header.css');
-    wp_enqueue_style('footer-style', get_template_directory_uri() . '/assets/css/footer.css');
     wp_enqueue_style('single-style', get_template_directory_uri() . '/assets/css/single-photo.css');
     wp_enqueue_style('style-style', get_template_directory_uri() . '/assets/css/style.css');
     wp_enqueue_style('modal-style', get_template_directory_uri() . '/assets/css/modal.css');
@@ -18,9 +17,16 @@ function theme_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
+
+
+// Pour charger Ajax
 function theme_scripts() {
     wp_enqueue_script('script', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), '', true);
     wp_localize_script('script', 'ajaxurl', admin_url('admin-ajax.php'));
+
+// Bibliothèque Select2 pour les selects de tri
+    wp_enqueue_script('select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js', array('jquery'), '4.0.13', true);
+    wp_enqueue_style('select2-css', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css', array());
 }
 add_action('wp_footer', 'theme_scripts');
 

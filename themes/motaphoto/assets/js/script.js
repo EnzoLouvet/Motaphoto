@@ -143,4 +143,69 @@
     // Initialiser les événements de la lightbox lors du chargement initial de la page
     initLightboxEvents();
 
+
+
+
+
+    // Ce code entre automatiquement la référence dans les formulaires
+    jQuery(document).ready(function($) {
+        // Affiche la modal quand le bouton de contact est cliqué
+        $('#openModalButton').click(function() {
+            var refPhoto = $(this).data('ref-photo');
+            $('#myModal').css('display', 'block');
+            
+            // Prémplir le champ "ref-photo" avec la valeur de la référence photo
+            $('#myModal').find('input#ref-photo').val(refPhoto);
+        });
+    
+        // Ferme la modal en cliquant en dehors du contenu de la modal
+        $(window).click(function(event) {
+            if ($(event.target).hasClass('modal')) {
+                $('.modal').css('display', 'none');
+            }
+        });
+    });
+
+
+    // Pré-remplir le champ "REF-PHOTO" avec la référence de la photo
+jQuery(document).ready(function($) {
+    // Display the modal when the contact button is clicked
+    $('#openModalButton').click(function() {
+        var refPhoto = $(this).data('ref-photo');
+        $('#myModal').css('display', 'block');
+        
+        // Pre-fill the "REF-PHOTO" field with the photo reference
+        $('input[name="REF-PHOTO"]').val(refPhoto);
+    });
+
+    // Close the modal when clicking outside the modal content
+    $(window).click(function(event) {
+        if ($(event.target).hasClass('modal')) {
+            $('.modal').css('display', 'none');
+        }
+    });
+});
+
+
+//Permet au bouton qu'une fois cliqué il disparaît
+document.addEventListener('DOMContentLoaded', function() {
+    const btnChargerPlus = document.getElementById('btn-charger-plus');
+    let isBtnClicked = false;
+
+    btnChargerPlus.addEventListener('click', function() {
+        if (!isBtnClicked) {
+            isBtnClicked = true;
+
+            // Chargez plus de contenu ici, si nécessaire
+
+            // Masquez le bouton après le premier clic
+            btnChargerPlus.style.display = 'none';
+        }
+    });
+});
+
+
+ 
+    
+
 })(jQuery);
